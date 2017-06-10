@@ -12,10 +12,25 @@ export default class Card extends React.Component {
     footerLink: PropTypes.node,
     footerText: PropTypes.node,
     header: PropTypes.node,
+    photonStyle: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    // New-style cards that we'll roll out gradually so we don't break
+    // older card components. Photon is the name of the new Firefox
+    // design language.
+    photon: false,
   }
 
   render() {
-    const { children, className, footerText, footerLink, header } = this.props;
+    const {
+      children,
+      className,
+      footerText,
+      footerLink,
+      header,
+      photonStyle,
+    } = this.props;
 
     let footer;
     let footerClass;
@@ -32,6 +47,7 @@ export default class Card extends React.Component {
 
     return (
       <section className={classNames('Card', className, {
+        'Card--photon': photonStyle,
         'Card--no-header': !header,
         'Card--no-footer': !footer,
       })} ref={(ref) => { this.cardContainer = ref; }}>
